@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "react-native";
 import { Card as PaperCard } from "react-native-paper";
 import styled from "styled-components/native";
-import sizing from "../../../utils/sizing";
+import sizing from "../../../infrastructure/sizing";
 
 const Card = styled(PaperCard)`
   padding: ${sizing.md}px;
@@ -27,7 +27,7 @@ const Cover = styled(PaperCard.Cover)`
 
 const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
-    name = "osmows",
+    name = "Osmows",
     icon,
     photos = [
       "https://viewthevibe.com/wp-content/uploads/2020/11/20286866_10154670277830846_8428188245732336832_o.jpg",
