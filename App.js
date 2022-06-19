@@ -1,21 +1,12 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import RestaurantScreen from "./src/features/restaurants/screens/restaurant-screen";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Hello World!</Text>
-      <Text>It's Sheen!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <RestaurantScreen />
+      <ExpoStatusBar style="auto" />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
