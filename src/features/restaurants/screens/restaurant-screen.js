@@ -1,15 +1,10 @@
 import React from "react";
-import {
-  StyleSheet,
-  SafeAreaView as SafeArea,
-  StatusBar,
-  Platform,
-} from "react-native";
-import sizing from "../../../utils/sizing";
+import { SafeAreaView as SafeArea, StatusBar, Platform } from "react-native";
 import { Searchbar } from "react-native-paper";
 import RestaurantInfoCard from "../components/restaurant-info-card.component";
 import styled from "styled-components/native";
 
+const isAndroid = Platform.OS === "android";
 const SafeAreaView = styled(SafeArea)`
   flex: 1;
   ${StatusBar.currentHeight &&
@@ -18,21 +13,20 @@ const SafeAreaView = styled(SafeArea)`
 
 const ListView = styled.View`
   flex: 1;
-  background-color: lightblue;
-  padding: ${sizing.md}px;
+  background-color: ${({ theme }) => theme.colours.bg.primary};
+  padding: ${({ theme }) => theme.space.lg};
 `;
 
 const SearchView = styled.View`
-  background-color: "lightpink";
-  padding: ${sizing.md}px;
+  background-color: ${({ theme }) => theme.colours.bg.secondary};
+  padding: ${({ theme }) => theme.space.lg};
 `;
 
-const isAndroid = Platform.OS === "android";
 const RestaurantScreen = () => {
   return (
     <SafeAreaView>
       <SearchView>
-        <Searchbar placeholder="Search"></Searchbar>
+        <Searchbar placeholder="Search" />
       </SearchView>
       <ListView>
         <RestaurantInfoCard />
