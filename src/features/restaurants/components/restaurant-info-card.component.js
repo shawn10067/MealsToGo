@@ -1,10 +1,22 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, View, Image } from "react-native";
 import { Card as PaperCard } from "react-native-paper";
 import styled from "styled-components/native";
 import { SvgXml } from "react-native-svg";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
+
+const StarSvg = () => {
+  return <SvgXml xml={star} width={20} height={20} />;
+};
+
+const OpenSvg = ({ isOpen }) => {
+  if (isOpen) {
+    return <SvgXml xml={open} width={25} height={25} />;
+  } else {
+    return null;
+  }
+};
 
 const Card = styled(PaperCard)`
   padding: ${({ theme }) => theme.space.lg};
@@ -27,7 +39,7 @@ const CardText = styled.Text`
   font-size: ${({ theme }) => theme.fontSizes.body};
 `;
 
-const CardLocationInfo = styled.View`
+const CardIconInfo = styled.View`
   flex-direction: row;
   justify-content: space-between;
   padding-right: ${({ theme }) => theme.space.md};
@@ -47,29 +59,28 @@ const Cover = styled(PaperCard.Cover)`
   border-bottom-right-radius: ${({ theme }) => theme.sizes.sm};
 `;
 
-const StarSvg = () => {
-  return <SvgXml xml={star} width={20} height={20} />;
-};
-
-const OpenSvg = ({ isOpen }) => {
-  if (isOpen) {
-    return <SvgXml xml={open} width={25} height={25} />;
-  } else {
-    return null;
-  }
-};
+const CardIconStatus = styled.View`
+  flex-grow: 1;
+  flex-direction: row;
+  align-content: flex-end;
+  justify-content: flex-end;
+`;
+const CardStars = styled.View`
+  flex-grow: 0;
+  flex-direction: row;
+`;
 
 const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
     name = "Osmows",
-    icon,
+    icon = "https://cdn-icons-png.flaticon.com/512/3296/3296455.png",
     photos = [
       "https://viewthevibe.com/wp-content/uploads/2020/11/20286866_10154670277830846_8428188245732336832_o.jpg",
     ],
     address = "Sandalwood & Kennedy",
     isOpenNow = true,
     rating = 4,
-    isClosedTemporarily,
+    isClosedTemporarily = true,
   } = restaurant;
 
   let starArray = Array.from(new Array(Math.floor(rating)));
@@ -79,15 +90,23 @@ const RestaurantInfoCard = ({ restaurant = {} }) => {
       <Cover source={{ uri: photos[0] }} blurRadius={0.2} />
       <CardInfoContainer>
         <CardText>{name}</CardText>
-        <CardStar>
-          {starArray.map((_, index) => (
-            <StarSvg key={index} />
-          ))}
-        </CardStar>
-        <CardLocationInfo>
-          <CardAddress>{address}</CardAddress>
-          <OpenSvg isOpen={isOpenNow} />
-        </CardLocationInfo>
+        <CardIconInfo>
+          <CardStars>
+            {starArray.map((_, index) => (
+              <StarSvg key={index} />
+            ))}
+          </CardStars>
+          <CardIconStatus>
+            {isClosedTemporarily && (
+              <Text variant="label" style={{ color: "red" }}>
+                CLOSED TEMPORARILY
+              </Text>
+            )}
+            <OpenSvg isOpen={isOpenNow} />
+            <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+          </CardIconStatus>
+        </CardIconInfo>
+        <CardAddress>{address}</CardAddress>
       </CardInfoContainer>
     </Card>
   );
