@@ -99,7 +99,9 @@ const RestaurantInfoCard = ({ restaurant = {} }) => {
                 CLOSED TEMPORARILY
               </Text>
             )}
+            <Spacer position="left" size="small" />
             <OpenSvg isOpen={isOpenNow} />
+            <Spacer position="left" size="small" />
             <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
           </CardIconStatus>
         </CardIconInfo>

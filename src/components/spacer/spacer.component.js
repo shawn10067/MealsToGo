@@ -21,13 +21,13 @@ const getVariant = (position, size) => {
   return posString;
 };
 
-const Spacer = styled.View`
-  margin-left: 10;
+const SpacerView = styled.View`
+  ${({ variant }) => variant}
 `;
 
-Spacer.defaultProps = {
-  position: "top",
-  size: "small",
+const Spacer = ({ position, size }) => {
+  const variant = getVariant(position, size);
+  return <SpacerView variant={variant} />;
 };
 
 export default Spacer;
