@@ -17,17 +17,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import SafeAreaView from "./src/components/safeAreaView";
-import restaurantRequest from "./src/services/restaurants/restaurants.service";
-import camelize from "camelize";
-
-const restaurantTransform = (result) => {
-  return camelize(result);
-};
-
-restaurantRequest()
-  .then(restaurantTransform)
-  .then((restaurants) => console.log(restaurants))
-  .catch((error) => console.log(error));
+import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
 
 function SettingsScreen() {
   return (
@@ -87,13 +77,15 @@ export default function App() {
 
   return (
     <>
-      <NavigationContainer>
-        <Tab.Navigator screenOptions={createScreenOptions}>
-          <Tab.Screen name="Restaurants" component={RestaurantScreen} />
-          <Tab.Screen name="Map" component={MapScreen} />
-          <Tab.Screen name="Settings" component={SettingsScreen} />
-        </Tab.Navigator>
-      </NavigationContainer>
+      <RestaurantContextProvider>
+        <NavigationContainer>
+          <Tab.Navigator screenOptions={createScreenOptions}>
+            <Tab.Screen name="Restaurants" component={RestaurantScreen} />
+            <Tab.Screen name="Map" component={MapScreen} />
+            <Tab.Screen name="Settings" component={SettingsScreen} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </RestaurantContextProvider>
       <ExpoStatusBar style="auto" />
     </>
   );
