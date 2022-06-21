@@ -5,6 +5,7 @@ import styled from "styled-components/native";
 import { SvgXml } from "react-native-svg";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
+import Spacer from "../../../components/spacer/spacer.component";
 
 const StarSvg = () => {
   return <SvgXml xml={star} width={20} height={20} />;
@@ -28,15 +29,9 @@ const CardInfoContainer = styled.View`
   padding-top: ${({ theme }) => theme.space.lg};
 `;
 
-const CardStar = styled.View`
-  flex-direction: row;
-  padding-top: ${({ theme }) => theme.space.md};
-  padding-bottom: ${({ theme }) => theme.space.md};
-`;
-
 const CardText = styled.Text`
   font-family: ${({ theme }) => theme.fonts.heading};
-  font-size: ${({ theme }) => theme.fontSizes.body};
+  font-size: ${({ theme }) => theme.fontSizes.title};
 `;
 
 const CardIconInfo = styled.View`
@@ -62,12 +57,14 @@ const Cover = styled(PaperCard.Cover)`
 const CardIconStatus = styled.View`
   flex-grow: 1;
   flex-direction: row;
-  align-content: flex-end;
+  align-items: center;
   justify-content: flex-end;
 `;
 const CardStars = styled.View`
   flex-grow: 0;
   flex-direction: row;
+  padding-top: ${({ theme }) => theme.space.md};
+  padding-bottom: ${({ theme }) => theme.space.md};
 `;
 
 const RestaurantInfoCard = ({ restaurant = {} }) => {
@@ -77,7 +74,7 @@ const RestaurantInfoCard = ({ restaurant = {} }) => {
     photos = [
       "https://viewthevibe.com/wp-content/uploads/2020/11/20286866_10154670277830846_8428188245732336832_o.jpg",
     ],
-    address = "Sandalwood & Kennedy",
+    address = "170 Sandalwood Pkwy E, Brampton, ON L6Z 1Y5",
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = true,
