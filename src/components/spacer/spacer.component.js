@@ -17,7 +17,6 @@ const positionVariant = {
 
 const getVariant = (position, size) => {
   const posString = `${positionVariant[position]}:${sizes[sizeVariant[size]]}`;
-  console.log(posString);
   return posString;
 };
 
@@ -28,6 +27,11 @@ const SpacerView = styled.View`
 const Spacer = ({ position, size }) => {
   const variant = getVariant(position, size);
   return <SpacerView variant={variant} />;
+};
+
+Spacer.defaultProps = {
+  position: "top",
+  size: "small",
 };
 
 export default Spacer;
