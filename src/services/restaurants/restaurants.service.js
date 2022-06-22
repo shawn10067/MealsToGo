@@ -1,4 +1,4 @@
-import { mocks } from "./mock";
+import { mockImages, mocks } from "./mock";
 import camelize from "camelize";
 
 export const restaurantRequest = (location = "43.653225,-79.383186") => {
@@ -9,7 +9,7 @@ export const restaurantRequest = (location = "43.653225,-79.383186") => {
     } else {
       setTimeout(() => {
         resolve(data);
-      }, 1500);
+      }, 750);
     }
   });
 };
@@ -23,8 +23,9 @@ export const restaurantTransform = ({ results = [] }) => {
         restaurantObject.opening_hours.open_now,
       isClosedTemporarily:
         restaurantObject.business_status === "CLOSED_TEMPORARILY",
+      photos: [mockImages[Math.floor(Math.random() * mockImages.length)]],
+      address: restaurantObject.vicinity,
     };
   });
   return camelize(mappedResults);
 };
-

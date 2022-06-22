@@ -12,7 +12,7 @@ import {
   useFonts as useSignikaFonts,
   SignikaNegative_300Light,
 } from "@expo-google-fonts/signika-negative";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -36,9 +36,9 @@ function MapScreen() {
 
 const RestaurantScreen = () => {
   return (
-    <ThemeProvider theme={theme}>
+    <SafeAreaView>
       <RestaurantScreenList />
-    </ThemeProvider>
+    </SafeAreaView>
   );
 };
 
@@ -56,6 +56,13 @@ const createScreenOptions = ({ route }) => {
     ),
     tabBarActiveTintColor: "tomato",
     tabBarInactiveTintColor: "gray",
+    tabBarStyle: {
+      flex: 0.087,
+    },
+    tabBarItemStyle: {
+      padding: 6,
+    },
+    headerShown: false,
   };
 };
 
@@ -77,16 +84,19 @@ export default function App() {
 
   return (
     <>
-      <RestaurantContextProvider>
-        <NavigationContainer>
-          <Tab.Navigator screenOptions={createScreenOptions}>
-            <Tab.Screen name="Restaurants" component={RestaurantScreen} />
-            <Tab.Screen name="Map" component={MapScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-          </Tab.Navigator>
-        </NavigationContainer>
-      </RestaurantContextProvider>
-      <ExpoStatusBar style="auto" />
+      <ThemeProvider theme={theme}>
+        <RestaurantContextProvider>
+          <NavigationContainer>
+            <Tab.Navigator screenOptions={createScreenOptions}>
+              <Tab.Screen name="Restaurants" component={RestaurantScreen} />
+              <Tab.Screen name="Map" component={MapScreen} />
+              <Tab.Screen name="Settings" component={SettingsScreen} />
+            </Tab.Navigator>
+          </NavigationContainer>
+
+          <ExpoStatusBar style="auto" />
+        </RestaurantContextProvider>
+      </ThemeProvider>
     </>
   );
 }
