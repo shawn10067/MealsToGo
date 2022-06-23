@@ -35,9 +35,10 @@ const RestaurantInfoCard = ({ restaurant = {}, navigation, route }) => {
   return (
     <TouchableOpacity
       onPress={() =>
-        navigation
+        navigation && !route
           ? navigation.navigate("Restaurant Details", {
               restaurant,
+              pressed: true,
             })
           : null
       }
