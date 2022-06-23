@@ -1,4 +1,5 @@
 import React from "react";
+import { TouchableOpacity } from "react-native";
 import Spacer from "../../../components/spacer/spacer.component";
 import Text from "../../../components/typography/text.component";
 import {
@@ -13,7 +14,7 @@ import {
   Icon,
 } from "./restaurant-info-card.styles";
 
-const RestaurantInfoCard = ({ restaurant = {} }) => {
+const RestaurantInfoCard = ({ restaurant = {}, navigation, route }) => {
   const {
     name = "Osmows",
     icon = "https://cdn-icons-png.flaticon.com/512/3296/3296455.png",
@@ -24,34 +25,47 @@ const RestaurantInfoCard = ({ restaurant = {} }) => {
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = true,
-  } = restaurant;
+    placeId,
+  } = route && route.params && route.params.restaurant
+    ? route.params.restaurant
+    : restaurant;
 
   let starArray = Array.from(new Array(Math.floor(rating)));
 
   return (
-    <Card elevation={5}>
-      <Cover source={{ uri: photos[0] }} blurRadius={0.2} />
-      <CardInfoContainer>
-        <Text variant="label">{name}</Text>
-        <CardIconInfo>
-          <CardStars>
-            {starArray.map((_, index) => (
-              <StarSvg key={index} />
-            ))}
-          </CardStars>
-          <CardIconStatus>
-            {isClosedTemporarily && (
-              <Text variant="error">CLOSED TEMPORARILY</Text>
-            )}
-            <Spacer position="left" size="small" />
-            <OpenSvg isOpen={isOpenNow} />
-            <Spacer position="left" size="small" />
-            <Icon uri={icon} />
-          </CardIconStatus>
-        </CardIconInfo>
-        <Text variant="body">{address}</Text>
-      </CardInfoContainer>
-    </Card>
+    <TouchableOpacity
+      onPress={() =>
+        navigation
+          ? navigation.navigate("Restaurant Details", {
+              restaurant,
+            })
+          : null
+      }
+    >
+      <Card elevation={5}>
+        <Cover source={{ uri: photos[0] }} blurRadius={0.2} />
+        <CardInfoContainer>
+          <Text variant="label">{name}</Text>
+          <CardIconInfo>
+            <CardStars>
+              {starArray.map((_, index) => (
+                <StarSvg key={`star-${placeId}-${index}`} />
+              ))}
+            </CardStars>
+            <CardIconStatus>
+              {isClosedTemporarily && (
+                <Text variant="error">CLOSED TEMPORARILY</Text>
+              )}
+              <Spacer position="left" size="small" />
+              <OpenSvg isOpen={isOpenNow} />
+              <Spacer position="left" size="small" />
+              <Icon uri={icon} />
+            </CardIconStatus>
+          </CardIconInfo>
+          <Text variant="body">{address}</Text>
+        </CardInfoContainer>
+      </Card>
+    </TouchableOpacity>
   );
 };
 

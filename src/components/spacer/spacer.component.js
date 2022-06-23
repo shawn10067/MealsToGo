@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import sizes from "../../infrastructure/sizes";
+import sizes from "../../infrastructure/theme/sizes";
 
 const sizeVariant = {
   small: "sm",

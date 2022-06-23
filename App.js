@@ -1,8 +1,7 @@
 import React from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import RestaurantScreenList from "./src/features/restaurants/screens/restaurant-screen";
 import { ThemeProvider } from "styled-components/native";
-import theme from "./src/infrastructure";
+import theme from "./src/infrastructure/theme";
 import {
   useFonts as useOxygenFonts,
   Oxygen_400Regular,
@@ -12,61 +11,9 @@ import {
   useFonts as useSignikaFonts,
   SignikaNegative_300Light,
 } from "@expo-google-fonts/signika-negative";
-import { Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import SafeAreaView from "./src/components/safeAreaView";
 import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
-
-function SettingsScreen() {
-  return (
-    <SafeAreaView>
-      <Text>Settings!</Text>
-    </SafeAreaView>
-  );
-}
-function MapScreen() {
-  return (
-    <SafeAreaView>
-      <Text>Map!</Text>
-    </SafeAreaView>
-  );
-}
-
-const RestaurantScreen = () => {
-  return (
-    <SafeAreaView>
-      <RestaurantScreenList />
-    </SafeAreaView>
-  );
-};
-
-const TAB_ICON = {
-  Restaurants: "fast-food-outline",
-  Map: "map",
-  Settings: "ios-settings-outline",
-};
-
-const createScreenOptions = ({ route }) => {
-  const iconName = TAB_ICON[route.name];
-  return {
-    tabBarIcon: ({ size, color }) => (
-      <Ionicons name={iconName} size={size} color={color} />
-    ),
-    tabBarActiveTintColor: "tomato",
-    tabBarInactiveTintColor: "gray",
-    tabBarStyle: {
-      flex: 0.087,
-    },
-    tabBarItemStyle: {
-      padding: 6,
-    },
-    headerShown: false,
-  };
-};
-
-const Tab = createBottomTabNavigator();
+import { LocationContextProvider } from "./src/services/location/location.context";
+import Navigation from "./src/infrastructure/navigation/";
 
 export default function App() {
   const [oxygenFonts] = useOxygenFonts({
@@ -85,17 +32,12 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <RestaurantContextProvider>
-          <NavigationContainer>
-            <Tab.Navigator screenOptions={createScreenOptions}>
-              <Tab.Screen name="Restaurants" component={RestaurantScreen} />
-              <Tab.Screen name="Map" component={MapScreen} />
-              <Tab.Screen name="Settings" component={SettingsScreen} />
-            </Tab.Navigator>
-          </NavigationContainer>
-
-          <ExpoStatusBar style="auto" />
-        </RestaurantContextProvider>
+        <LocationContextProvider>
+          <RestaurantContextProvider>
+            <Navigation />
+            <ExpoStatusBar style="auto" />
+          </RestaurantContextProvider>
+        </LocationContextProvider>
       </ThemeProvider>
     </>
   );
