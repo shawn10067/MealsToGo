@@ -1,15 +1,10 @@
 import React, { useContext } from "react";
 import { FlatList } from "react-native";
-import { ActivityIndicator, Searchbar } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 import RestaurantInfoCard from "../components/restaurant-info-card.component";
 import styled from "styled-components/native";
 import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
-import { LocationContext } from "../../../services/location/location.context";
-
-const SearchView = styled.View`
-  background-color: ${({ theme }) => theme.colours.bg.secondary};
-  padding: ${({ theme }) => theme.space.lg};
-`;
+import SearchBar from "../components/search.bar";
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
@@ -26,13 +21,10 @@ const LoadingContainer = styled.View`
 const RestaurantScreen = ({ navigation }) => {
   // eslint-disable-next-line no-unused-vars
   const { restaurants, isLoading, error } = useContext(RestaurantContext);
-  const { search } = useContext(LocationContext);
 
   return (
     <>
-      <SearchView>
-        <Searchbar placeholder="Search" onChangeText={search} />
-      </SearchView>
+      <SearchBar />
       {isLoading ? (
         <LoadingContainer>
           <ActivityIndicator animating={true} color="blue" size={50} />

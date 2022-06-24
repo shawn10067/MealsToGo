@@ -1,9 +1,21 @@
 import React from "react";
-import MapView from "react-native-maps";
+import SafeAreaView from "../../../components/safeAreaView";
+import ReactNativeMap from "react-native-maps";
 import styled from "styled-components/native";
+import SearchBar from "../components/search.bar";
 
-const Map = styled(MapView)`
+const Map = styled(ReactNativeMap)`
   height: 100%;
 `;
 
-export default Map;
+const MapView = () => {
+  return (
+    <Map>
+      <SafeAreaView>
+        <SearchBar />
+      </SafeAreaView>
+    </Map>
+  );
+};
+
+export default MapView;
