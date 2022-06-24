@@ -6,6 +6,10 @@ import { LocationContext } from "../../../services/location/location.context";
 
 const SearchView = styled.View`
   padding: ${({ theme }) => theme.space.lg};
+  position: absolute;
+  z-index: 999;
+  top: 5%;
+  width: 100%;
 `;
 
 const SearchBar = () => {

@@ -6,15 +6,15 @@ import SearchBar from "../components/search.bar";
 
 const Map = styled(ReactNativeMap)`
   height: 100%;
+  width: 100%;
 `;
 
 const MapView = () => {
   return (
-    <Map>
-      <SafeAreaView>
-        <SearchBar />
-      </SafeAreaView>
-    </Map>
+    <>
+      <SearchBar />
+      <Map />
+    </>
   );
 };
 
