@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { Searchbar } from "react-native-paper";
 import styled from "styled-components";
@@ -10,10 +10,19 @@ const SearchView = styled.View`
 `;
 
 const SearchBar = () => {
-  const { search } = useContext(LocationContext);
+  const { search, keyword } = useContext(LocationContext);
+  const [searchTerm, setSearchTerm] = useState(keyword);
+  useEffect(() => {
+    setSearchTerm(keyword);
+  }, [keyword]);
   return (
     <SearchView>
-      <Searchbar placeholder="Search" onChangeText={search} />
+      <Searchbar
+        placeholder="Search"
+        onChangeText={(text) => setSearchTerm(text)}
+        onEndEditing={() => search(searchTerm)}
+        value={searchTerm}
+      />
     </SearchView>
   );
 };

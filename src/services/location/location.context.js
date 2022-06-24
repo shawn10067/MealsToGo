@@ -5,19 +5,19 @@ import { locationRequest, locationTransform } from "./location.service";
 export const LocationContext = createContext();
 
 export const LocationContextProvider = ({ children }) => {
-  const [keyword, setKeyword] = useState("toronto");
+  const [keyword, setKeyword] = useState("Toronto");
   const [location, setLocation] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const search = (newKeyword) => {
     setIsLoading(true);
-    setKeyword(newKeyword.toLowerCase());
+    setKeyword(newKeyword);
   };
 
   useEffect(() => {
     setIsLoading(true);
-    locationRequest(keyword)
+    locationRequest(keyword.toLowerCase())
       .then((data) => {
         setIsLoading(false);
         setError(false);
@@ -36,6 +36,7 @@ export const LocationContextProvider = ({ children }) => {
         isLoading,
         error,
         search,
+        keyword,
       }}
     >
       {children}
