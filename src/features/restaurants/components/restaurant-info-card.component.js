@@ -1,5 +1,6 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
+import Favourite from "../../../components/favourites/favourite.component";
 import Spacer from "../../../components/spacer/spacer.component";
 import Text from "../../../components/typography/text.component";
 import {
@@ -15,6 +16,7 @@ import {
 } from "./restaurant-info-card.styles";
 
 const RestaurantInfoCard = ({ restaurant = {}, navigation, route }) => {
+  const paramsRest = route && route.params && route.params.restaurant;
   const {
     name = "Osmows",
     icon = "https://cdn-icons-png.flaticon.com/512/3296/3296455.png",
@@ -26,9 +28,7 @@ const RestaurantInfoCard = ({ restaurant = {}, navigation, route }) => {
     rating = 4,
     isClosedTemporarily = true,
     placeId,
-  } = route && route.params && route.params.restaurant
-    ? route.params.restaurant
-    : restaurant;
+  } = paramsRest ? paramsRest : restaurant;
 
   let starArray = Array.from(new Array(Math.floor(rating)));
 
@@ -44,6 +44,7 @@ const RestaurantInfoCard = ({ restaurant = {}, navigation, route }) => {
       }
     >
       <Card elevation={5}>
+        <Favourite restaurant={paramsRest ? paramsRest : restaurant} />
         <Cover source={{ uri: photos[0] }} blurRadius={0.2} />
         <CardInfoContainer>
           <Text variant="label">{name}</Text>

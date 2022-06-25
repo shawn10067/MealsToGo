@@ -9,7 +9,7 @@ const SearchView = styled.View`
   padding: ${({ theme }) => theme.space.lg};
 `;
 
-const SearchBar = () => {
+const SearchBar = ({ onFavouritesToggled, favouritesToggled }) => {
   const { search, keyword } = useContext(LocationContext);
   const [searchTerm, setSearchTerm] = useState(keyword);
   useEffect(() => {
@@ -22,6 +22,9 @@ const SearchBar = () => {
         onChangeText={(text) => setSearchTerm(text)}
         onEndEditing={() => search(searchTerm)}
         value={searchTerm}
+        icon="heart"
+        onIconPress={onFavouritesToggled}
+        iconColor={favouritesToggled ? "red" : null}
       />
     </SearchView>
   );

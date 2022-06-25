@@ -4,7 +4,7 @@ import ReactNativeMap, { Marker, Callout } from "react-native-maps";
 import styled from "styled-components/native";
 import { LocationContext } from "../../../services/location/location.context";
 import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
-import CompactRestaurantView from "../../../components/restaurant-callout.component";
+import CompactRestaurantView from "../../../components/restaurant-compact.component";
 import SearchBar from "../components/search.bar";
 
 const Map = styled(ReactNativeMap)`

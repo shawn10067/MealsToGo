@@ -33,10 +33,10 @@ const CompactWebView = styled(WebView)`
 
 const isAndroid = Platform.OS === "android";
 const CompactRestaurantView = ({ restaurant, navigation }) => {
-  const Image = isAndroid ? CompactWebView : CompactImage;
+  //const Image = isAndroid ? CompactWebView : CompactImage;
   return (
     <CompactView>
-      <Image source={{ uri: restaurant.photos[0] }} />
+      <CompactImage source={{ uri: restaurant.photos[0] }} />
       <CompactText>{restaurant.name}</CompactText>
     </CompactView>
   );

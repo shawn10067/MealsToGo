@@ -14,6 +14,7 @@ import {
 import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
 import Navigation from "./src/infrastructure/navigation/";
+import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
 
 export default function App() {
   const [oxygenFonts] = useOxygenFonts({
@@ -34,8 +35,10 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <LocationContextProvider>
           <RestaurantContextProvider>
-            <Navigation />
-            <ExpoStatusBar style="auto" />
+            <FavouritesContextProvider>
+              <Navigation />
+              <ExpoStatusBar style="auto" />
+            </FavouritesContextProvider>
           </RestaurantContextProvider>
         </LocationContextProvider>
       </ThemeProvider>
