@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import ReactNativeMap, { Marker } from "react-native-maps";
+import { View, Text } from "react-native";
+import ReactNativeMap, { Marker, Callout } from "react-native-maps";
 import styled from "styled-components/native";
 import { LocationContext } from "../../../services/location/location.context";
 import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
+import CompactRestaurantView from "../../../components/restaurant-callout.component";
 import SearchBar from "../components/search.bar";
 
 const Map = styled(ReactNativeMap)`
@@ -10,7 +12,7 @@ const Map = styled(ReactNativeMap)`
   width: 100%;
 `;
 
-const MapView = () => {
+const MapView = ({ navigation }) => {
   const { location } = useContext(LocationContext);
   const { restaurants } = useContext(RestaurantContext);
   const [latDelta, setLatDelta] = useState(0);
@@ -39,7 +41,20 @@ const MapView = () => {
             latitude: restaurant.geometry.location.lat,
             longitude: restaurant.geometry.location.lng,
           };
-          return <Marker coordinate={restLocation} key={index} />;
+          return (
+            <Marker coordinate={restLocation} key={index}>
+              <Callout
+                onPress={() =>
+                  navigation.navigate("Restaurant Details", { restaurant })
+                }
+              >
+                <CompactRestaurantView
+                  restaurant={restaurant}
+                  navigation={navigation}
+                />
+              </Callout>
+            </Marker>
+          );
         })}
       </Map>
     </>
