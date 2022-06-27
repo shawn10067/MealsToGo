@@ -2,7 +2,6 @@ import React from "react";
 import { Text } from "react-native-paper";
 import { createStackNavigator } from "@react-navigation/stack";
 import AccountScreen from "../../features/account/screens/account.screen";
-
 const Stack = createStackNavigator();
 
 const AccountNavigator = () => {

@@ -1,28 +1,34 @@
 import React from "react";
-import { ImageBackground, Text } from "react-native";
-import styled from "styled-components/native";
-
-const image = {
-  uri: "https://s2.best-wallpaper.net/wallpaper/iphone/1708/Cutting-board-fork-spoon-mint-leaves_iphone_1080x1920.jpg",
-};
-
-const ScreenContainer = styled.View`
-  flex: 1;
-`;
-
-const BackgroundImage = styled(ImageBackground)`
-  flex: 1;
-`;
-
-const OptionsView = styled.View``;
+import {
+  ScreenContainer,
+  BackgroundImage,
+  BackgroundOverlay,
+  ContentContainer,
+  OptionsView,
+  bgimage,
+  AuthButton,
+} from "../components/account.screen.styles";
 
 const AccountScreen = () => {
   return (
-    <ScreenContainer>
-      <BackgroundImage source={image}>
-        <Text>Yur</Text>
-      </BackgroundImage>
-    </ScreenContainer>
+    <>
+      <ScreenContainer>
+        <BackgroundImage source={bgimage}>
+          <BackgroundOverlay>
+            <ContentContainer>
+              <OptionsView>
+                <AuthButton icon="lock" mode="contained" textColor="white">
+                  Login
+                </AuthButton>
+                <AuthButton icon="account" mode="contained" textColor="white">
+                  create account
+                </AuthButton>
+              </OptionsView>
+            </ContentContainer>
+          </BackgroundOverlay>
+        </BackgroundImage>
+      </ScreenContainer>
+    </>
   );
 };
 

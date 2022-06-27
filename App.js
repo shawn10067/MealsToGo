@@ -37,13 +37,6 @@ if (!getApps().length) {
 
 // main app config
 export default function App() {
-  const [authenticated, setAuthenticated] = useState(false);
-  useEffect(() => {
-    loginRequest("sheeen200@gmail.com", "Wowow123").then((user) => {
-      setAuthenticated(true);
-    });
-  }, []);
-
   const [oxygenFonts] = useOxygenFonts({
     Oxygen_400Regular,
     Oxygen_700Bold,
@@ -56,10 +49,6 @@ export default function App() {
   if (!oxygenFonts || !signikaFonts) {
     return null;
   }
-
-  if (!authenticated) {
-    return <Text>Get authenticated!</Text>;
-  }
   return (
     <>
       <AuthenticationProvider>
@@ -68,7 +57,7 @@ export default function App() {
             <RestaurantContextProvider>
               <FavouritesContextProvider>
                 <Navigation />
-                <ExpoStatusBar style="auto" />
+                <ExpoStatusBar style="inverted" animated={true} />
               </FavouritesContextProvider>
             </RestaurantContextProvider>
           </LocationContextProvider>
