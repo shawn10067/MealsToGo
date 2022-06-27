@@ -9,7 +9,7 @@ import {
   AuthButton,
 } from "../components/account.screen.styles";
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation }) => {
   return (
     <>
       <ScreenContainer>
@@ -17,10 +17,20 @@ const AccountScreen = () => {
           <BackgroundOverlay>
             <ContentContainer>
               <OptionsView>
-                <AuthButton icon="lock" mode="contained" textColor="white">
+                <AuthButton
+                  icon="lock"
+                  mode="contained"
+                  textColor="white"
+                  onPress={() => navigation.navigate("Login")}
+                >
                   Login
                 </AuthButton>
-                <AuthButton icon="account" mode="contained" textColor="white">
+                <AuthButton
+                  icon="account"
+                  mode="contained"
+                  textColor="white"
+                  onPress={() => navigation.navigate("Registration")}
+                >
                   create account
                 </AuthButton>
               </OptionsView>
