@@ -10,8 +10,8 @@ export const AuthenticationProvider = ({ children }) => {
 
   const onLogin = (email, password) => {
     loginRequest(email, password)
-      .then((user) => {
-        setUser(user);
+      .then((authenticatedUser) => {
+        setUser(authenticatedUser);
         setIsLoading(false);
         setError(null);
       })
