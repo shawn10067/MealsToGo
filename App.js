@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 // firebase import (first incase the context and other's need it?)
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components/native";
 import theme from "./src/infrastructure/theme";
-import { getApps, initializeApp } from "firebase/app";
 import {
   useFonts as useOxygenFonts,
   Oxygen_400Regular,
@@ -17,11 +16,10 @@ import { RestaurantContextProvider } from "./src/services/restaurants/restaurant
 import { LocationContextProvider } from "./src/services/location/location.context";
 import Navigation from "./src/infrastructure/navigation/";
 import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
-import { loginRequest } from "./src/services/authentication/authentication.service";
-import { Text } from "react-native-paper";
 import { AuthenticationProvider } from "./src/services/authentication/authentication.context";
+import { getApps, initializeApp } from "firebase/app";
 
-// firebase confit and setup
+// firebase config and setup
 const firebaseConfig = {
   apiKey: "AIzaSyA67trxBBjOCjF-LEC9BjBCdx3C554qgJk",
   authDomain: "mealstogo-be58e.firebaseapp.com",
@@ -31,7 +29,7 @@ const firebaseConfig = {
   appId: "1:484801297118:web:c4c927481e5816535de04f",
 };
 
-if (!getApps().length) {
+if (getApps().length === 0) {
   initializeApp(firebaseConfig);
 }
 

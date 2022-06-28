@@ -1,5 +1,5 @@
 import React, { useState, createContext } from "react";
-import { loginRequest } from "./authentication.service";
+import { createRequest, loginRequest } from "./authentication.service";
 
 export const AuthenticationContext = createContext();
 
@@ -19,9 +19,23 @@ export const AuthenticationProvider = ({ children }) => {
         setError(err);
         setIsLoading(false);
         setUser(null);
-        console.log("error");
       });
   };
+
+  const onRegistration = (email, password) => {
+    createRequest(email, password)
+      .then((authenticatedUser) => {
+        setUser(authenticatedUser);
+        setIsLoading(false);
+        setError(null);
+      })
+      .catch((err) => {
+        setError(err);
+        setIsLoading(false);
+        setUser(null);
+      });
+  };
+
   return (
     <AuthenticationContext.Provider
       value={{
@@ -29,6 +43,7 @@ export const AuthenticationProvider = ({ children }) => {
         user,
         error,
         onLogin,
+        onRegistration,
       }}
     >
       {children}

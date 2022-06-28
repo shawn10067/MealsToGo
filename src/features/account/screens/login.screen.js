@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { View } from "react-native";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import {
   AuthButton,
@@ -8,6 +7,8 @@ import {
   ScreenContainer,
 } from "../components/account.screen.styles";
 import {
+  ErrorText,
+  ErrorView,
   LoginField,
   LoginFieldView,
   LoginOptionsView,
@@ -16,7 +17,7 @@ import {
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { onLogin } = useContext(AuthenticationContext);
+  const { onLogin, error } = useContext(AuthenticationContext);
   return (
     <ScreenContainer>
       <BackgroundImage>
@@ -28,6 +29,9 @@ const LoginScreen = () => {
                 placeholder="Email"
                 onChangeText={(val) => setUsername(val)}
                 value={username}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                textContentType="emailAddress"
               />
               <LoginField
                 secureTextEntry={true}
@@ -35,7 +39,15 @@ const LoginScreen = () => {
                 placeholder="Password"
                 onChangeText={(val) => setPassword(val)}
                 value={password}
+                autoCapitalize="none"
+                textContentType="password"
               />
+
+              {error && (
+                <ErrorView>
+                  <ErrorText>{error.toString()}</ErrorText>
+                </ErrorView>
+              )}
             </LoginFieldView>
             <AuthButton
               icon="lock"

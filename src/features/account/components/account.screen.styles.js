@@ -2,9 +2,7 @@ import { ImageBackground } from "react-native";
 import { Button } from "react-native-paper";
 import styled from "styled-components/native";
 
-export const bgimage = {
-  uri: "https://s2.best-wallpaper.net/wallpaper/iphone/1708/Cutting-board-fork-spoon-mint-leaves_iphone_1080x1920.jpg",
-};
+export const bgimage = require("../../../../assets/cuttingBoard.jpg");
 
 export const ScreenContainer = styled.View`
   flex: 1;

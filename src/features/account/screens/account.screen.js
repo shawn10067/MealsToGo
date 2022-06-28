@@ -5,7 +5,6 @@ import {
   BackgroundOverlay,
   ContentContainer,
   OptionsView,
-  bgimage,
   AuthButton,
 } from "../components/account.screen.styles";
 
