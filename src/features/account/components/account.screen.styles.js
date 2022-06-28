@@ -1,7 +1,6 @@
 import { ImageBackground } from "react-native";
 import { Button } from "react-native-paper";
 import styled from "styled-components/native";
-import colours from "../../../infrastructure/theme/colours";
 
 export const bgimage = {
   uri: "https://s2.best-wallpaper.net/wallpaper/iphone/1708/Cutting-board-fork-spoon-mint-leaves_iphone_1080x1920.jpg",
@@ -24,7 +23,9 @@ export const ContentContainer = styled.View`
   align-items: center;
 `;
 
-export const BackgroundImage = styled(ImageBackground)`
+export const BackgroundImage = styled(ImageBackground).attrs({
+  source: bgimage,
+})`
   flex: 1;
 `;
 
@@ -38,7 +39,10 @@ export const OptionsView = styled.View`
   justify-content: space-evenly;
 `;
 
-export const AuthButton = styled(Button)`
+export const AuthButton = styled(Button).attrs({
+  mode: "contained",
+  textColor: "white",
+})`
   width: 80%;
   height: 60px;
   border-radius: 10px;

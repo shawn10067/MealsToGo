@@ -13,13 +13,12 @@ const AccountScreen = ({ navigation }) => {
   return (
     <>
       <ScreenContainer>
-        <BackgroundImage source={bgimage}>
+        <BackgroundImage>
           <BackgroundOverlay>
             <ContentContainer>
               <OptionsView>
                 <AuthButton
                   icon="lock"
-                  mode="contained"
                   textColor="white"
                   onPress={() => navigation.navigate("Login")}
                 >
@@ -27,7 +26,6 @@ const AccountScreen = ({ navigation }) => {
                 </AuthButton>
                 <AuthButton
                   icon="account"
-                  mode="contained"
                   textColor="white"
                   onPress={() => navigation.navigate("Registration")}
                 >
