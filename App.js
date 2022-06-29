@@ -12,10 +12,8 @@ import {
   useFonts as useSignikaFonts,
   SignikaNegative_300Light,
 } from "@expo-google-fonts/signika-negative";
-import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
-import { LocationContextProvider } from "./src/services/location/location.context";
+
 import Navigation from "./src/infrastructure/navigation/";
-import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
 import { AuthenticationProvider } from "./src/services/authentication/authentication.context";
 import { getApps, initializeApp } from "firebase/app";
 
@@ -51,14 +49,8 @@ export default function App() {
     <>
       <AuthenticationProvider>
         <ThemeProvider theme={theme}>
-          <LocationContextProvider>
-            <RestaurantContextProvider>
-              <FavouritesContextProvider>
-                <Navigation />
-                <ExpoStatusBar style="inverted" animated={true} />
-              </FavouritesContextProvider>
-            </RestaurantContextProvider>
-          </LocationContextProvider>
+          <Navigation />
+          <ExpoStatusBar style="inverted" animated={true} />
         </ThemeProvider>
       </AuthenticationProvider>
     </>

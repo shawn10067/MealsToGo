@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import SafeAreaView from "../../components/safeAreaView";
-import { Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import RestaurantsNavigator from "./restaurant.navigator";
 import MapView from "../../features/map/screens/map.screen";
+import { Button } from "react-native-paper";
+import { AuthenticationContext } from "../../services/authentication/authentication.context";
+import { RestaurantContextProvider } from "../../services/restaurants/restaurants.context";
+import { LocationContextProvider } from "../../services/location/location.context";
+import { FavouritesContextProvider } from "../../services/favourites/favourites.context";
 
 function SettingsScreen() {
+  const { logout } = useContext(AuthenticationContext);
   return (
-    <SafeAreaView>
-      <Text>Settings!</Text>
+    <SafeAreaView style={{ justifyContent: "center", alignItems: "center" }}>
+      <Button onPress={logout}>Logout</Button>
     </SafeAreaView>
   );
 }
@@ -42,11 +47,17 @@ const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={createScreenOptions}>
-      <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
-      <Tab.Screen name="Map" component={MapView} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
+    <LocationContextProvider>
+      <RestaurantContextProvider>
+        <FavouritesContextProvider>
+          <Tab.Navigator screenOptions={createScreenOptions}>
+            <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
+            <Tab.Screen name="Map" component={MapView} />
+            <Tab.Screen name="Settings" component={SettingsScreen} />
+          </Tab.Navigator>
+        </FavouritesContextProvider>
+      </RestaurantContextProvider>
+    </LocationContextProvider>
   );
 };
 
