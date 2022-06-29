@@ -42,9 +42,10 @@ export const AuthButton = styled(Button).attrs({
   textColor: "white",
 })`
   width: 80%;
-  height: 60px;
   border-radius: 10px;
   justify-content: center;
   text-align: center;
   background-color: black;
+  padding-top: 15px;
+  padding-bottom: 15px;
 `;

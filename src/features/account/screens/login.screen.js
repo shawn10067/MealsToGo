@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { ActivityIndicator } from "react-native-paper";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import {
   AuthButton,
@@ -17,7 +18,7 @@ import {
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { onLogin, error } = useContext(AuthenticationContext);
+  const { onLogin, error, loading } = useContext(AuthenticationContext);
   return (
     <ScreenContainer>
       <BackgroundImage>
@@ -49,13 +50,17 @@ const LoginScreen = () => {
                 </ErrorView>
               )}
             </LoginFieldView>
-            <AuthButton
-              icon="lock"
-              textColor="white"
-              onPress={() => onLogin(username, password)}
-            >
-              Login
-            </AuthButton>
+            {loading ? (
+              <ActivityIndicator color="black" />
+            ) : (
+              <AuthButton
+                icon="lock"
+                textColor="white"
+                onPress={() => onLogin(username, password)}
+              >
+                Login
+              </AuthButton>
+            )}
           </LoginOptionsView>
         </ContentContainer>
       </BackgroundImage>

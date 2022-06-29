@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { ActivityIndicator } from "react-native-paper";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import {
   AuthButton,
@@ -17,8 +18,8 @@ import {
 const RegistrationScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [secondPassword, setSecondPassword] = useState("");
-  const { onRegistration, error } = useContext(AuthenticationContext);
+  const [repeatedPassword, setRepeatedPassword] = useState("");
+  const { onRegistration, error, loading } = useContext(AuthenticationContext);
   return (
     <ScreenContainer>
       <BackgroundImage>
@@ -47,8 +48,8 @@ const RegistrationScreen = () => {
                 secureTextEntry={true}
                 label={"Repeat Password"}
                 placeholder="Repeat Password"
-                onChangeText={(val) => setSecondPassword(val)}
-                value={secondPassword}
+                onChangeText={(val) => setRepeatedPassword(val)}
+                value={repeatedPassword}
                 autoCapitalize="none"
                 textContentType="password"
               />
@@ -59,18 +60,19 @@ const RegistrationScreen = () => {
                 </ErrorView>
               )}
             </LoginFieldView>
-            <AuthButton
-              icon="lock"
-              textColor="white"
-              onPress={() => {
-                if (password === secondPassword) {
-                  onRegistration(username, password);
-                } else {
-                }
-              }}
-            >
-              Login
-            </AuthButton>
+            {loading ? (
+              <ActivityIndicator color="blue" />
+            ) : (
+              <AuthButton
+                icon="email"
+                textColor="white"
+                onPress={() => {
+                  onRegistration(username, password, repeatedPassword);
+                }}
+              >
+                Create Account
+              </AuthButton>
+            )}
           </LoginOptionsView>
         </ContentContainer>
       </BackgroundImage>
