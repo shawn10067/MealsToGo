@@ -6,7 +6,7 @@ import MapView from "../../features/map/screens/map.screen";
 import { RestaurantContextProvider } from "../../services/restaurants/restaurants.context";
 import { LocationContextProvider } from "../../services/location/location.context";
 import { FavouritesContextProvider } from "../../services/favourites/favourites.context";
-import SettingsScreen from "../../features/settings/screens/settings.screens";
+import SettingsNavigator from "./settings.navigator";
 
 const TAB_ICON = {
   Restaurants: "fast-food-outline",
@@ -42,7 +42,7 @@ const AppNavigator = () => {
           <Tab.Navigator screenOptions={createScreenOptions}>
             <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
             <Tab.Screen name="Map" component={MapView} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
+            <Tab.Screen name="Settings" component={SettingsNavigator} />
           </Tab.Navigator>
         </FavouritesContextProvider>
       </RestaurantContextProvider>

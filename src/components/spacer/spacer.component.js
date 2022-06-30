@@ -24,9 +24,9 @@ const SpacerView = styled.View`
   ${({ variant }) => variant}
 `;
 
-const Spacer = ({ position, size }) => {
+const Spacer = ({ position, size, children }) => {
   const variant = getVariant(position, size);
-  return <SpacerView variant={variant} />;
+  return <SpacerView variant={variant}>{children}</SpacerView>;
 };
 
 Spacer.defaultProps = {

@@ -8,7 +8,7 @@ import SearchBar from "../components/search.bar";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import FavouritesBar from "../../../components/favourites/favourites.bar.js";
 
-const RestaurantList = styled(FlatList).attrs({
+export const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
     padding: 16,
   },
