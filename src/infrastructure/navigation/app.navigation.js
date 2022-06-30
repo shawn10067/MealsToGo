@@ -1,23 +1,12 @@
-import React, { useContext } from "react";
-import SafeAreaView from "../../components/safeAreaView";
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import RestaurantsNavigator from "./restaurant.navigator";
 import MapView from "../../features/map/screens/map.screen";
-import { Button } from "react-native-paper";
-import { AuthenticationContext } from "../../services/authentication/authentication.context";
 import { RestaurantContextProvider } from "../../services/restaurants/restaurants.context";
 import { LocationContextProvider } from "../../services/location/location.context";
 import { FavouritesContextProvider } from "../../services/favourites/favourites.context";
-
-function SettingsScreen() {
-  const { logout } = useContext(AuthenticationContext);
-  return (
-    <SafeAreaView style={{ justifyContent: "center", alignItems: "center" }}>
-      <Button onPress={logout}>Logout</Button>
-    </SafeAreaView>
-  );
-}
+import SettingsScreen from "../../features/settings/screens/settings.screens";
 
 const TAB_ICON = {
   Restaurants: "fast-food-outline",
