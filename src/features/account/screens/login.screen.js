@@ -4,7 +4,6 @@ import { AuthenticationContext } from "../../../services/authentication/authenti
 import {
   AuthButton,
   BackgroundImage,
-  ContentContainer,
   ScreenContainer,
 } from "../components/account.screen.styles";
 import {
@@ -13,6 +12,7 @@ import {
   LoginField,
   LoginFieldView,
   LoginOptionsView,
+  LoginContentContainer,
 } from "../components/login.screen.styles";
 
 const LoginScreen = () => {
@@ -22,7 +22,7 @@ const LoginScreen = () => {
   return (
     <ScreenContainer>
       <BackgroundImage>
-        <ContentContainer>
+        <LoginContentContainer>
           <LoginOptionsView>
             <LoginFieldView>
               <LoginField
@@ -62,7 +62,7 @@ const LoginScreen = () => {
               </AuthButton>
             )}
           </LoginOptionsView>
-        </ContentContainer>
+        </LoginContentContainer>
       </BackgroundImage>
     </ScreenContainer>
   );

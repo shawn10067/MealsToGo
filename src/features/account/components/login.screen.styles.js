@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components/native";
 import { TextInput } from "react-native-paper";
 
@@ -6,10 +5,16 @@ export const LoginOptionsView = styled.View`
   padding-top: 35px;
   padding-bottom: 35px;
   width: 85%;
-  background-color: rgba(255, 235, 205, 0.958);
+  background-color: rgba(245, 245, 245, 0.9);
   border-radius: 10px;
   align-items: center;
   justify-content: space-evenly;
+`;
+
+export const LoginContentContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const LoginField = styled(TextInput).attrs({

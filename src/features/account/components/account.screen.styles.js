@@ -1,11 +1,24 @@
 import { ImageBackground } from "react-native";
 import { Button } from "react-native-paper";
 import styled from "styled-components/native";
+import Lottie from "lottie-react-native";
 
 export const bgimage = require("../../../../assets/cuttingBoard.jpg");
 
 export const ScreenContainer = styled.View`
   flex: 1;
+`;
+
+export const LottieContainer = styled.View`
+  width: 100%;
+  flex: 2;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+`;
+
+export const AnimationConatiner = styled.View`
+  padding-top: 40px;
 `;
 
 export const BackgroundOverlay = styled.View`
@@ -16,8 +29,8 @@ export const BackgroundOverlay = styled.View`
 `;
 
 export const ContentContainer = styled.View`
-  flex: 1;
-  justify-content: center;
+  flex: 3;
+  justify-content: flex-start;
   align-items: center;
 `;
 
@@ -28,11 +41,11 @@ export const BackgroundImage = styled(ImageBackground).attrs({
 `;
 
 export const OptionsView = styled.View`
-  height: 25%;
+  margin-top: 60px;
+  height: 45%;
   width: 85%;
-  background-color: rgba(255, 235, 205, 0.958);
+  background-color: rgba(245, 245, 245, 0.9);
   border-radius: 10px;
-  margin-top: 100px;
   align-items: center;
   justify-content: space-evenly;
 `;

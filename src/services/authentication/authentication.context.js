@@ -19,8 +19,9 @@ export const AuthenticationProvider = ({ children }) => {
   });
 
   const logout = () => {
-    signOut(auth);
-    setUser(null);
+    signOut(auth)
+      .then(() => setUser(null))
+      .then(() => console.log("logged out"));
   };
 
   const onLogin = (email, password) => {
