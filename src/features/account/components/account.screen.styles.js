@@ -1,7 +1,6 @@
 import { ImageBackground } from "react-native";
 import { Button } from "react-native-paper";
 import styled from "styled-components/native";
-import Lottie from "lottie-react-native";
 
 export const bgimage = require("../../../../assets/cuttingBoard.jpg");
 

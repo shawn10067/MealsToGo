@@ -7,15 +7,19 @@ import {
   OptionsView,
   AuthButton,
   LottieContainer,
-  AnimationConatiner,
 } from "../components/account.screen.styles";
 import LottieView from "lottie-react-native";
 
 const AccountScreen = ({ navigation }) => {
-  const animation = useRef(null);
+  const lottieRef = useRef(null);
   useEffect(() => {
-    animation.current?.play();
-  }, []);
+    if (lottieRef.current) {
+      setTimeout(() => {
+        lottieRef.current?.reset();
+        lottieRef.current?.play();
+      }, 100);
+    }
+  }, [lottieRef.current]);
 
   return (
     <>
@@ -24,14 +28,13 @@ const AccountScreen = ({ navigation }) => {
           <BackgroundOverlay>
             <LottieContainer>
               <LottieView
-                autoPlay
-                loop
                 source={require("../../../../assets/char-sui.json")}
                 resizeMode="cover"
                 key="animation"
-                ref={(newAnimation) => {
-                  animation.current = newAnimation;
-                }}
+                ref={lottieRef}
+                speed={1}
+                loop={true}
+                renderMode={"SOFTWARE"}
               />
             </LottieContainer>
             <ContentContainer>
