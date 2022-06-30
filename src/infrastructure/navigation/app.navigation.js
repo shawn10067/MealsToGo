@@ -7,6 +7,7 @@ import { RestaurantContextProvider } from "../../services/restaurants/restaurant
 import { LocationContextProvider } from "../../services/location/location.context";
 import { FavouritesContextProvider } from "../../services/favourites/favourites.context";
 import SettingsNavigator from "./settings.navigator";
+import { ProfilePictureContextProvider } from "../../services/profilePicture/profilePicture.context";
 
 const TAB_ICON = {
   Restaurants: "fast-food-outline",
@@ -39,11 +40,13 @@ const AppNavigator = () => {
     <LocationContextProvider>
       <RestaurantContextProvider>
         <FavouritesContextProvider>
-          <Tab.Navigator screenOptions={createScreenOptions}>
-            <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
-            <Tab.Screen name="Map" component={MapView} />
-            <Tab.Screen name="Settings" component={SettingsNavigator} />
-          </Tab.Navigator>
+          <ProfilePictureContextProvider>
+            <Tab.Navigator screenOptions={createScreenOptions}>
+              <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
+              <Tab.Screen name="Map" component={MapView} />
+              <Tab.Screen name="Settings" component={SettingsNavigator} />
+            </Tab.Navigator>
+          </ProfilePictureContextProvider>
         </FavouritesContextProvider>
       </RestaurantContextProvider>
     </LocationContextProvider>
