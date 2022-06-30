@@ -4,6 +4,7 @@ import { AuthenticationContext } from "../../../services/authentication/authenti
 import { List, Avatar, Text } from "react-native-paper";
 import styled from "styled-components/native";
 import Spacer from "../../../components/spacer/spacer.component";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const SettingsItem = styled(List.Item)`
   padding: ${(props) => props.theme.space.md};
@@ -21,7 +22,9 @@ const SettingsScreen = ({ props, navigation }) => {
     <SafeAreaView>
       <List.Section>
         <AvatarContainer>
-          <Avatar.Icon size={90} icon="human" />
+          <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
+            <Avatar.Icon size={90} icon="human" />
+          </TouchableOpacity>
           <Spacer position="top" size="large">
             <Text>{user.email}</Text>
           </Spacer>
