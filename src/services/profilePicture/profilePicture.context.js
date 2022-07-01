@@ -9,10 +9,12 @@ export const ProfilePictureContextProvider = ({ children }) => {
   const [profilePicture, setProfilePicture] = useState(null);
 
   const getPhoto = async (inputUser) => {
-    const savedUri = await AsyncStorage.getItem(`${inputUser.uid}-photo`);
-    console.log(`getting "${inputUser.uid}-photo"`);
-    if (savedUri) {
-      setProfilePicture(savedUri);
+    if (inputUser && inputUser.uid) {
+      const savedUri = await AsyncStorage.getItem(`${inputUser.uid}-photo`);
+      console.log(`getting "${inputUser.uid}-photo: ${savedUri}"`);
+      if (savedUri) {
+        setProfilePicture(savedUri);
+      }
     }
   };
 

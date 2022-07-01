@@ -43,7 +43,7 @@ const CameraScreen = ({ navigation }) => {
   const snapPhoto = async () => {
     if (cameraRef) {
       const photo = await cameraRef.current.takePictureAsync();
-      await AsyncStorage.setItem(`${user.id}-photo`, photo.uri);
+      await AsyncStorage.setItem(`${user.uid}-photo`, photo.uri);
       setProfilePicture(photo.uri);
       navigation.goBack();
     }
