@@ -11,7 +11,6 @@ export const ProfilePictureContextProvider = ({ children }) => {
   const getPhoto = async (inputUser) => {
     if (inputUser && inputUser.uid) {
       const savedUri = await AsyncStorage.getItem(`${inputUser.uid}-photo`);
-      console.log(`getting "${inputUser.uid}-photo: ${savedUri}"`);
       if (savedUri) {
         setProfilePicture(savedUri);
       }

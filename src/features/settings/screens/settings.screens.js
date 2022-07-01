@@ -26,7 +26,6 @@ const SettingsScreen = ({ props, navigation }) => {
 
   useEffect(() => {
     setPfp(profilePicture);
-    console.log(profilePicture);
   }, [profilePicture]);
 
   return (
