@@ -1,17 +1,13 @@
-import { mockImages, mocks } from "./mock";
 import camelize from "camelize";
-
+import axios from "axios";
 export const restaurantRequest = (location) => {
-  return new Promise((resolve, reject) => {
-    const data = mocks[location];
-    if (!data) {
-      reject("No data");
-    } else {
-      setTimeout(() => {
-        resolve(data);
-      }, 750);
-    }
-  });
+  return axios
+    .get("http://localhost:5001/mealstogo-be58e/us-central1/places", {
+      params: {
+        location,
+      },
+    })
+    .then((result) => result.data);
 };
 
 export const restaurantTransform = ({ results = [] }) => {
@@ -23,7 +19,6 @@ export const restaurantTransform = ({ results = [] }) => {
         restaurantObject.opening_hours.open_now,
       isClosedTemporarily:
         restaurantObject.business_status === "CLOSED_TEMPORARILY",
-      photos: [mockImages[Math.floor(Math.random() * mockImages.length)]],
       address: restaurantObject.vicinity,
     };
   });

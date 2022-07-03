@@ -8,13 +8,11 @@ export const locationRequest = (locationSearchTerm) => {
         city: locationSearchTerm,
       },
     })
-    .then((result) => console.log("RES", result.data))
-    .then((result) => (result ? result.data : new Error("No data")))
+    .then((result) => result.data)
     .catch((e) => console.log("Network Error ", e.response));
 };
 
 export const locationTransform = (result) => {
-  console.log("FUNC RES", result);
   const formattedResult = camelize(result);
   const { results = [] } = formattedResult;
   const { geometry = {} } = camelize(results[0]);
