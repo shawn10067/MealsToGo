@@ -6,9 +6,11 @@ module.exports.placesRequest = (request, response) => {
   if (location) {
     const result = mocks[location];
     if (result) {
-      result.photos = [
-        mockImages[Math.floor(Math.random() * mockImages.length)],
-      ];
+      result.results.map((restaurant) => {
+        restaurant.photos = [
+          mockImages[Math.floor(Math.random() * mockImages.length)],
+        ];
+      });
       response.json(result);
     } else {
       response.json({ error: "no results" });

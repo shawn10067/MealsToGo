@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const locationRequest = (locationSearchTerm) => {
   return axios
-    .get("http://localhost:5001/mealstogo-be58e/us-central1/geocode", {
+    .get("https://us-central1-mealstogo-be58e.cloudfunctions.net/geocode", {
       params: {
         city: locationSearchTerm,
       },

@@ -2,7 +2,7 @@ import camelize from "camelize";
 import axios from "axios";
 export const restaurantRequest = (location) => {
   return axios
-    .get("http://localhost:5001/mealstogo-be58e/us-central1/places", {
+    .get("https://us-central1-mealstogo-be58e.cloudfunctions.net/places", {
       params: {
         location,
       },
