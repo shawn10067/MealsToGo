@@ -7,20 +7,23 @@ export const restaurantRequest = (location) => {
         location,
       },
     })
-    .then((result) => result.data);
+    .then((result) => result.data)
+    .catch((e) => console.log(e.response));
 };
 
 export const restaurantTransform = ({ results = [] }) => {
-  const mappedResults = results.map((restaurantObject) => {
-    return {
-      ...restaurantObject,
-      isOpenNow:
-        restaurantObject.opening_hours &&
-        restaurantObject.opening_hours.open_now,
-      isClosedTemporarily:
-        restaurantObject.business_status === "CLOSED_TEMPORARILY",
-      address: restaurantObject.vicinity,
-    };
-  });
+  const mappedResults = results
+    .filter((val) => val !== null)
+    .map((restaurantObject) => {
+      return {
+        ...restaurantObject,
+        isOpenNow:
+          restaurantObject.opening_hours &&
+          restaurantObject.opening_hours.open_now,
+        isClosedTemporarily:
+          restaurantObject.business_status === "CLOSED_TEMPORARILY",
+        address: restaurantObject.vicinity,
+      };
+    });
   return camelize(mappedResults);
 };

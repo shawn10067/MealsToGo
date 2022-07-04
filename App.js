@@ -33,8 +33,6 @@ if (getApps().length === 0) {
 
 // main app config
 export default function App() {
-  // TODO: Install firebase-tools on mac and run firebase-login on google chrome (URL remover weird)
-
   const [oxygenFonts] = useOxygenFonts({
     Oxygen_400Regular,
     Oxygen_700Bold,
