@@ -1,9 +1,9 @@
 const { mocks, mockImages } = require("./mock");
 const url = require("url");
 
-module.exports.placesRequest = (request, response) => {
-  const { location } = url.parse(request.url, true).query;
-  if (location) {
+module.exports.placesRequest = (request, response, client) => {
+  const { location, mock } = url.parse(request.url, true).query;
+  if (location && mock === "true") {
     const result = mocks[location];
     if (result) {
       result.results.map((restaurant) => {
@@ -15,6 +15,8 @@ module.exports.placesRequest = (request, response) => {
     } else {
       response.json({ error: "no results" });
     }
+  } else if (location) {
+    response.json({ status: "no mock needed" });
   } else {
     response.json({ error: "no location provided" });
   }

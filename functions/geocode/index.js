@@ -1,8 +1,8 @@
 const { locations: locationMock } = require("./geocode.mock");
 const url = require("url");
 
-module.exports.geocodeRequest = (request, response) => {
-  const { city } = url.parse(request.url, true).query;
+module.exports.geocodeRequest = (request, response, client) => {
+  const { city, mock } = url.parse(request.url, true).query;
   if (city) {
     const result = locationMock[city.toLowerCase()];
     if (result) {
