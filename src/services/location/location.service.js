@@ -6,6 +6,7 @@ export const locationRequest = (locationSearchTerm) => {
     .get("https://us-central1-mealstogo-be58e.cloudfunctions.net/geocode", {
       params: {
         city: locationSearchTerm,
+        mock: "true",
       },
     })
     .then((result) => result.data)

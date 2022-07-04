@@ -5,6 +5,7 @@ export const restaurantRequest = (location) => {
     .get("https://us-central1-mealstogo-be58e.cloudfunctions.net/places", {
       params: {
         location,
+        mock: "true",
       },
     })
     .then((result) => result.data)
