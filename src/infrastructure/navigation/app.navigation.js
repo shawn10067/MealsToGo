@@ -8,11 +8,13 @@ import { LocationContextProvider } from "../../services/location/location.contex
 import { FavouritesContextProvider } from "../../services/favourites/favourites.context";
 import SettingsNavigator from "./settings.navigator";
 import { ProfilePictureContextProvider } from "../../services/profilePicture/profilePicture.context";
+import CheckoutScreen from "../../features/account/checkout/screens/checkout.screen";
 
 const TAB_ICON = {
   Restaurants: "fast-food-outline",
   Map: "map",
   Settings: "ios-settings-outline",
+  Checkout: "md-cart",
 };
 
 const createScreenOptions = ({ route }) => {
@@ -21,8 +23,8 @@ const createScreenOptions = ({ route }) => {
     tabBarIcon: ({ size, color }) => (
       <Ionicons name={iconName} size={size} color={color} />
     ),
-    tabBarActiveTintColor: "tomato",
-    tabBarInactiveTintColor: "gray",
+    tabBarActiveTintColor: "violet",
+    tabBarInactiveTintColor: "black",
     tabBarStyle: {
       flex: 0.087,
     },
@@ -44,6 +46,7 @@ const AppNavigator = () => {
             <Tab.Navigator screenOptions={createScreenOptions}>
               <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
               <Tab.Screen name="Map" component={MapView} />
+              <Tab.Screen name="Checkout" component={CheckoutScreen} />
               <Tab.Screen name="Settings" component={SettingsNavigator} />
             </Tab.Navigator>
           </ProfilePictureContextProvider>
