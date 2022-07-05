@@ -8,7 +8,7 @@ import { LocationContextProvider } from "../../services/location/location.contex
 import { FavouritesContextProvider } from "../../services/favourites/favourites.context";
 import SettingsNavigator from "./settings.navigator";
 import { ProfilePictureContextProvider } from "../../services/profilePicture/profilePicture.context";
-import CheckoutScreen from "../../features/account/checkout/screens/checkout.screen";
+import CheckoutScreen from "../../features/checkout/screens/checkout.screen";
 
 const TAB_ICON = {
   Restaurants: "fast-food-outline",
