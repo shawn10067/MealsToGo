@@ -36,7 +36,12 @@ const SettingsScreen = ({ props, navigation }) => {
             {pfp ? (
               <Avatar.Image size={90} source={{ uri: pfp }} />
             ) : (
-              <Avatar.Icon size={90} icon="human" />
+              <Avatar.Icon
+                size={90}
+                icon="human"
+                color="white"
+                style={{ backgroundColor: "violet" }}
+              />
             )}
           </TouchableOpacity>
           <Spacer position="top" size="large">

@@ -22,10 +22,10 @@ const RestaurantScreen = ({ navigation }) => {
 };
 
 const RestuarantCardView = styled.View`
-  flex: 0.4;
+  flex: 0.5;
 `;
 const MenuView = styled.View`
-  flex: 0.5;
+  flex: 0.4;
 `;
 const ButtonView = styled.View`
   flex: 0.1;
@@ -113,9 +113,10 @@ const Restaurant = ({ navigation, route }) => {
             onPress={() => {
               //console.log(route.params.restaurant);
               addToCart(
-                { item: "special", price: 129 },
+                { item: "special", price: 1299 },
                 route.params.restaurant
               );
+              navigation.navigate("Checkout");
             }}
           >
             Order Special ($12.99)

@@ -1,26 +1,59 @@
-import React, { useContext } from "react";
-import { Text } from "react-native-paper";
-import styled from "styled-components/native";
+import React, { useContext, useEffect, useState } from "react";
+import { List, Text } from "react-native-paper";
 import SafeAreaView from "../../../components/safeAreaView";
 import { CartContext } from "../../../services/cart/cart.context";
+import RestaurantInfoCard from "../../restaurants/components/restaurant-info-card.component";
+import {
+  CartEmptyText,
+  CartIcon,
+  CartIconContainer,
+  CartItemScroll,
+  CartList,
+  CartTextView,
+  CartView,
+  TotalText,
+} from "../components/checkout.styles";
 import CreditCardInput from "../components/credit-card.component";
-
-const CartTextView = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
 
 const CheckoutScreen = () => {
   const { cart, restuarant } = useContext(CartContext);
-  return (
-    <SafeAreaView>
-      <CartTextView>
-        <Text>{JSON.stringify(cart)}</Text>
+
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const finalSum = cart.reduce((cartTotal, item) => {
+      return cartTotal + item.price;
+    }, 0);
+    setTotal(finalSum / 100);
+  }, [cart]);
+
+  if (cart.length === 0 || !restuarant) {
+    return (
+      <SafeAreaView>
+        <CartIconContainer>
+          <CartIcon icon="cart-off" />
+          <CartEmptyText>Your cart is empty</CartEmptyText>
+        </CartIconContainer>
+      </SafeAreaView>
+    );
+  } else {
+    return (
+      <SafeAreaView>
+        <RestaurantInfoCard restaurant={restuarant} />
+        <CartView>
+          <CartItemScroll>
+            <CartList title="Order">
+              {cart.map(({ item, price }) => (
+                <List.Item title={`${item} - ${price / 100}`} />
+              ))}
+            </CartList>
+          </CartItemScroll>
+          <TotalText>Total: ${total}</TotalText>
+        </CartView>
         <CreditCardInput />
-      </CartTextView>
-    </SafeAreaView>
-  );
+      </SafeAreaView>
+    );
+  }
 };
 
 export default CheckoutScreen;
