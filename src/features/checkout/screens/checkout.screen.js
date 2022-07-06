@@ -12,13 +12,11 @@ const CartTextView = styled.View`
 `;
 
 const CheckoutScreen = () => {
-  const { cart, restuaurant } = useContext(CartContext);
+  const { cart, restuarant } = useContext(CartContext);
   return (
     <SafeAreaView>
       <CartTextView>
-        <Text>
-          {JSON.stringify(cart)} and {JSON.stringify(restuaurant)}
-        </Text>
+        <Text>{JSON.stringify(cart)}</Text>
         <CreditCardInput />
       </CartTextView>
     </SafeAreaView>

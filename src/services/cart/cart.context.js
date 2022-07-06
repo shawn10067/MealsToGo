@@ -13,7 +13,7 @@ export const CartContextProvider = ({ children }) => {
       setRestaurant(rst);
       setCart([item]);
     } else {
-      setCart([...cart], item);
+      setCart([...cart, item]);
     }
   };
 

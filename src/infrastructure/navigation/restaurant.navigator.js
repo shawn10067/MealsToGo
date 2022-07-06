@@ -110,12 +110,13 @@ const Restaurant = ({ navigation, route }) => {
       <ButtonView>
         <TouchableOpacity>
           <SpecialButton
-            onPress={() =>
+            onPress={() => {
+              //console.log(route.params.restaurant);
               addToCart(
                 { item: "special", price: 129 },
                 route.params.restaurant
-              )
-            }
+              );
+            }}
           >
             Order Special ($12.99)
           </SpecialButton>
