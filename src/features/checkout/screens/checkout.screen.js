@@ -9,8 +9,11 @@ import {
   CartIconContainer,
   CartItemScroll,
   CartList,
-  CartTextView,
   CartView,
+  NameInput,
+  NameText,
+  NameTextView,
+  NameView,
   TotalText,
 } from "../components/checkout.styles";
 import CreditCardInput from "../components/credit-card.component";
@@ -18,6 +21,7 @@ import CreditCardInput from "../components/credit-card.component";
 const CheckoutScreen = () => {
   const { cart, restuarant } = useContext(CartContext);
 
+  const [name, setName] = useState("");
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
@@ -42,15 +46,26 @@ const CheckoutScreen = () => {
         <RestaurantInfoCard restaurant={restuarant} />
         <CartView>
           <CartItemScroll>
-            <CartList title="Order">
-              {cart.map(({ item, price }) => (
-                <List.Item title={`${item} - ${price / 100}`} />
+            <CartList title={"Order"}>
+              {cart.map(({ item, price }, index) => (
+                <List.Item title={`${item} - ${price / 100}`} key={index} />
               ))}
             </CartList>
           </CartItemScroll>
           <TotalText>Total: ${total}</TotalText>
         </CartView>
-        <CreditCardInput />
+        <NameView>
+          <NameTextView>
+            <NameText>Name: </NameText>
+          </NameTextView>
+          <NameInput
+            onChangeText={(val) => {
+              setName(val);
+            }}
+            value={name ? name : ""}
+          />
+        </NameView>
+        {name !== "" ? <CreditCardInput name={name} /> : null}
       </SafeAreaView>
     );
   }

@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { Avatar, List } from "react-native-paper";
+import { Avatar, List, TextInput } from "react-native-paper";
 import { ScrollView } from "react-native";
 
 export const CartTextView = styled.View`
@@ -44,4 +44,28 @@ export const CartList = styled(List.Accordion)`
 
 export const CartItemScroll = styled(ScrollView)`
   width: 100%;
+  margin-bottom: 10px;
+`;
+
+export const NameView = styled.View`
+  flex-direction: row;
+  padding: 10px;
+`;
+
+export const NameTextView = styled.View`
+  flex: 0.2;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const NameInput = styled(TextInput)`
+  flex: 0.8;
+  height: 40px;
+  width: 40%;
+  margin-right: 20px;
+`;
+
+export const NameText = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.heading};
+  font-size: 18px;
 `;
