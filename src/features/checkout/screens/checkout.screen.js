@@ -10,16 +10,19 @@ import {
   CartItemScroll,
   CartList,
   CartView,
+  ClearButton,
+  CreditCardView,
   NameInput,
   NameText,
   NameTextView,
   NameView,
+  PayButton,
   TotalText,
 } from "../components/checkout.styles";
 import CreditCardInput from "../components/credit-card.component";
 
 const CheckoutScreen = () => {
-  const { cart, restuarant } = useContext(CartContext);
+  const { cart, restuarant, clearCart } = useContext(CartContext);
 
   const [name, setName] = useState("");
   const [total, setTotal] = useState(0);
@@ -65,7 +68,17 @@ const CheckoutScreen = () => {
             value={name ? name : ""}
           />
         </NameView>
-        {name !== "" ? <CreditCardInput name={name} /> : null}
+        <CreditCardView>
+          {name !== "" ? (
+            <>
+              <CreditCardInput name={name} />
+              <PayButton icon="cash">Pay</PayButton>
+            </>
+          ) : null}
+          <ClearButton icon="cart-off" onPress={clearCart}>
+            Clear
+          </ClearButton>
+        </CreditCardView>
       </SafeAreaView>
     );
   }

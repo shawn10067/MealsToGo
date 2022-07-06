@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { Avatar, List, TextInput } from "react-native-paper";
+import { Avatar, Button, List, TextInput } from "react-native-paper";
 import { ScrollView } from "react-native";
 
 export const CartTextView = styled.View`
@@ -68,4 +68,31 @@ export const NameInput = styled(TextInput)`
 export const NameText = styled.Text`
   font-family: ${({ theme }) => theme.fonts.heading};
   font-size: 18px;
+`;
+
+export const PayButton = styled(Button).attrs({
+  color: "black",
+})`
+  width: 80%;
+  height: 50px;
+  margin: 8px;
+  background-color: turquoise;
+  justify-content: center;
+  border-radius: 20px;
+`;
+
+export const ClearButton = styled(Button).attrs({
+  color: "white",
+})`
+  width: 80%;
+  height: 50px;
+  margin: 8px;
+  background-color: blueviolet;
+  justify-content: center;
+  border-radius: 20px;
+`;
+
+export const CreditCardView = styled.View`
+  justify-content: center;
+  align-items: center;
 `;
