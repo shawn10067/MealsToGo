@@ -2,8 +2,8 @@ const functions = require("firebase-functions");
 const { geocodeRequest } = require("./geocode");
 const { placesRequest } = require("./places");
 const { Client } = require("@googlemaps/google-maps-services-js");
-const client = new Client({});
-
+const client = require("stripe")
+const stripeClient = new 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 
