@@ -1,5 +1,11 @@
 import styled from "styled-components/native";
-import { Avatar, Button, List, TextInput } from "react-native-paper";
+import {
+  ActivityIndicator,
+  Avatar,
+  Button,
+  List,
+  TextInput,
+} from "react-native-paper";
 import { ScrollView } from "react-native";
 
 export const CartTextView = styled.View`
@@ -95,4 +101,15 @@ export const ClearButton = styled(Button).attrs({
 export const CreditCardView = styled.View`
   justify-content: center;
   align-items: center;
+`;
+
+export const PaymentProcessing = styled(ActivityIndicator).attrs({
+  size: 128,
+  animating: true,
+  color: "blue",
+})`
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  z-index: 999;
 `;

@@ -8,19 +8,17 @@ const stripeClient = createStripe(
 export const cardTokenRequest = (card) => stripeClient.createToken({ card });
 
 export const payRequest = (token, amount, name) => {
-  axios({
+  return axios({
     url: "https://us-central1-mealstogo-be58e.cloudfunctions.net/pay",
     method: "post",
     data: {
       token,
       amount,
-      name,
     },
   }).then((val) => {
     if (val.status > 200) {
       return Promise.reject("Cannot handle payment request.");
-    } else {
-      console.log("success!", val.data);
     }
+    return val.data;
   });
 };

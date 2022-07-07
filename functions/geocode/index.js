@@ -2,7 +2,7 @@ const { locations: locationMock } = require("./geocode.mock");
 const url = require("url");
 const functions = require("firebase-functions");
 
-module.exports.geocodeRequest = (request, response, client) => {
+module.exports.geocodeRequest = (request, response, googleClient) => {
   const { city, mock } = url.parse(request.url, true).query;
   if (city && mock === "true") {
     const result = locationMock[city.toLowerCase()];
@@ -12,7 +12,7 @@ module.exports.geocodeRequest = (request, response, client) => {
       response.json({ error: "no such city found" });
     }
   } else if (city) {
-    client
+    googleClient
       .geocode({
         params: {
           address: city,

@@ -18,21 +18,37 @@ import {
   NameTextView,
   NameView,
   PayButton,
+  PaymentProcessing,
   TotalText,
 } from "../components/checkout.styles";
 import CreditCardInput from "../components/credit-card.component";
 
-const CheckoutScreen = () => {
+const CheckoutScreen = ({ navigation }) => {
   const { cart, restuarant, clearCart } = useContext(CartContext);
 
   const [name, setName] = useState("");
   const [total, setTotal] = useState(0);
   const [card, setCard] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // pay request
   const onPay = () => {
     if (card && card.id) {
-      payRequest(card.id, total, name);
+      setIsLoading(true);
+      payRequest(card.id, total * 100, name)
+        .then(() => {
+          navigation.navigate("Checkout Success");
+          setError(null);
+          setIsLoading(false);
+          clearCart();
+        })
+        .catch((e) => {
+          navigation.navigate("Checkout Error");
+          setError(e);
+          console.error("Error processing payment");
+          setIsLoading(false);
+        });
     }
   };
 
@@ -56,6 +72,7 @@ const CheckoutScreen = () => {
     return (
       <SafeAreaView>
         <RestaurantInfoCard restaurant={restuarant} />
+        {isLoading && <PaymentProcessing />}
         <CartView>
           <CartItemScroll>
             <CartList title={"Order"}>
@@ -81,12 +98,12 @@ const CheckoutScreen = () => {
           {name !== "" ? (
             <>
               <CreditCardInput name={name} setCard={setCard} />
-              <PayButton icon="cash" onPress={onPay}>
+              <PayButton icon="cash" onPress={onPay} disabled={isLoading}>
                 Pay
               </PayButton>
             </>
           ) : null}
-          <ClearButton icon="cart-off" onPress={clearCart}>
+          <ClearButton icon="cart-off" onPress={clearCart} disabled={isLoading}>
             Clear
           </ClearButton>
         </CreditCardView>

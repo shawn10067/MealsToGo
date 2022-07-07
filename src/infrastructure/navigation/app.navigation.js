@@ -8,8 +8,8 @@ import { LocationContextProvider } from "../../services/location/location.contex
 import { FavouritesContextProvider } from "../../services/favourites/favourites.context";
 import SettingsNavigator from "./settings.navigator";
 import { ProfilePictureContextProvider } from "../../services/profilePicture/profilePicture.context";
-import CheckoutScreen from "../../features/checkout/screens/checkout.screen";
 import { CartContextProvider } from "../../services/cart/cart.context";
+import CheckoutNavigator from "./checkout.navigator";
 
 const TAB_ICON = {
   Restaurants: "fast-food-outline",
@@ -51,7 +51,7 @@ const AppNavigator = () => {
                   component={RestaurantsNavigator}
                 />
                 <Tab.Screen name="Map" component={MapView} />
-                <Tab.Screen name="Checkout" component={CheckoutScreen} />
+                <Tab.Screen name="Checkout" component={CheckoutNavigator} />
                 <Tab.Screen name="Settings" component={SettingsNavigator} />
               </Tab.Navigator>
             </CartContextProvider>

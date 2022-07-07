@@ -21,7 +21,7 @@ const addGoogleImage = (restaurant) => {
   }
 };
 
-module.exports.placesRequest = (request, response, client) => {
+module.exports.placesRequest = (request, response, googleClient) => {
   const { location, mock } = url.parse(request.url, true).query;
   if (location && mock === "true") {
     const result = mocks[location];
@@ -36,7 +36,7 @@ module.exports.placesRequest = (request, response, client) => {
       response.json({ error: "no results" });
     }
   } else if (location) {
-    client
+    googleClient
       .placesNearby({
         params: {
           location,
