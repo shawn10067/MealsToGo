@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext, useState } from "react";
 import { AuthenticationContext } from "../authentication/authentication.context";
 
@@ -8,18 +9,32 @@ export const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [restuarant, setRestaurant] = useState(null);
 
-  const add = (item, rst) => {
-    if (!restuarant || restuarant.placeId !== rst.placeId) {
+  const add = async (item, rst) => {
+    const newRest = !restuarant || restuarant.placeId !== rst.placeId;
+    let newCart = newRest ? [item] : [...cart, item];
+    if (newRest) {
       setRestaurant(rst);
-      setCart([item]);
-    } else {
-      setCart([...cart, item]);
     }
+    setCart(newCart);
+    await AsyncStorage.setItem(
+      `${user.uid}-checkout`,
+      JSON.stringify({
+        checkoutRestaurant: rst,
+        checkoutCart: newCart,
+      })
+    );
   };
 
-  const clear = () => {
+  const clear = async () => {
     setCart([]);
     setRestaurant(null);
+    await AsyncStorage.setItem(
+      `${user.uid}-checkout`,
+      JSON.stringify({
+        checkoutRestaurant: null,
+        checkoutCart: [],
+      })
+    );
   };
   return (
     <CartContext.Provider

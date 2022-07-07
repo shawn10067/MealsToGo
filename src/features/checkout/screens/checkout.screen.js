@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useContext, useEffect, useState } from "react";
 import { List, Text } from "react-native-paper";
 import SafeAreaView from "../../../components/safeAreaView";
+import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { CartContext } from "../../../services/cart/cart.context";
 import { payRequest } from "../../../services/checkout/checkout.service";
 import RestaurantInfoCard from "../../restaurants/components/restaurant-info-card.component";
@@ -28,26 +29,34 @@ const CheckoutScreen = ({ navigation }) => {
   const { cart, restuarant, setCart, setRestaurant, clearCart } =
     useContext(CartContext);
 
+  const { user } = useContext(AuthenticationContext);
   const [name, setName] = useState("");
   const [total, setTotal] = useState(0);
   const [card, setCard] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // ge
-  const getCheckoutItems = async (inputUser) => {
-    if (inputUser && inputUser.uid) {
-      const savedCheckout = await AsyncStorage.getItem(
-        `${inputUser.uid}-checkout`
-      );
-      if (savedCheckout) {
-      }
-    }
-  };
-
   useEffect(() => {
-    getPhoto(user);
-  }, [user]);
+    // getting checkout items
+    const getCheckoutItems = async (inputUser) => {
+      if (inputUser && inputUser.uid) {
+        const savedCheckoutJSON = await AsyncStorage.getItem(
+          `${inputUser.uid}-checkout`
+        );
+        const savedCheckout = JSON.parse(savedCheckoutJSON);
+        if (
+          savedCheckout &&
+          savedCheckout.checkoutRestaurant &&
+          savedCheckout.checkoutCart
+        ) {
+          const { checkoutRestaurant, checkoutCart } = savedCheckout;
+          setRestaurant(checkoutRestaurant);
+          setCart(checkoutCart);
+        }
+      }
+    };
+    getCheckoutItems(user);
+  }, [user, setRestaurant, setCart]);
 
   // pay request
   const onPay = () => {
