@@ -16,6 +16,7 @@ import {
 import Navigation from "./src/infrastructure/navigation/";
 import { AuthenticationProvider } from "./src/services/authentication/authentication.context";
 import { getApps, initializeApp } from "firebase/app";
+import { payRequest } from "./functions/pay";
 
 // firebase config and setup
 const firebaseConfig = {

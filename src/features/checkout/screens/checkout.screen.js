@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { List, Text } from "react-native-paper";
 import SafeAreaView from "../../../components/safeAreaView";
 import { CartContext } from "../../../services/cart/cart.context";
+import { payRequest } from "../../../services/checkout/checkout.service";
 import RestaurantInfoCard from "../../restaurants/components/restaurant-info-card.component";
 import {
   CartEmptyText,
@@ -26,6 +27,14 @@ const CheckoutScreen = () => {
 
   const [name, setName] = useState("");
   const [total, setTotal] = useState(0);
+  const [card, setCard] = useState(null);
+
+  // pay request
+  const onPay = () => {
+    if (card && card.id) {
+      payRequest(card.id, total, name);
+    }
+  };
 
   useEffect(() => {
     const finalSum = cart.reduce((cartTotal, item) => {
@@ -71,8 +80,10 @@ const CheckoutScreen = () => {
         <CreditCardView>
           {name !== "" ? (
             <>
-              <CreditCardInput name={name} />
-              <PayButton icon="cash">Pay</PayButton>
+              <CreditCardInput name={name} setCard={setCard} />
+              <PayButton icon="cash" onPress={onPay}>
+                Pay
+              </PayButton>
             </>
           ) : null}
           <ClearButton icon="cart-off" onPress={clearCart}>

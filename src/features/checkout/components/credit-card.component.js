@@ -2,7 +2,7 @@ import React from "react";
 import { LiteCreditCardInput } from "react-native-credit-card-input";
 import { cardTokenRequest } from "../../../services/checkout/checkout.service";
 
-const CreditCardInput = ({ name = "Sheen" }) => {
+const CreditCardInput = ({ name = "Sheen", setCard }) => {
   const onCreditCardChange = async (val) => {
     const { values, status } = val;
     const isIncomplete = Object.values(status).includes("incomplete");
@@ -19,7 +19,7 @@ const CreditCardInput = ({ name = "Sheen" }) => {
         name,
       };
       const info = await cardTokenRequest(card);
-      console.log(info);
+      setCard(info);
     }
   };
   return <LiteCreditCardInput onChange={onCreditCardChange} />;

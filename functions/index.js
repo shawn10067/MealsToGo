@@ -2,15 +2,22 @@ const functions = require("firebase-functions");
 const { geocodeRequest } = require("./geocode");
 const { placesRequest } = require("./places");
 const { Client } = require("@googlemaps/google-maps-services-js");
-const client = require("stripe")
-const stripeClient = new 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
+const { payRequest } = require("./pay");
+
+// google api client
+const googleClient = new Client({});
+
+// stripe client
+const stripeClient = require("stripe")(functions.config().stripe.key);
 
 exports.geocode = functions.https.onRequest((request, response) => {
-  geocodeRequest(request, response, client);
+  geocodeRequest(request, response, googleClient);
 });
 
 exports.places = functions.https.onRequest((request, response) => {
-  placesRequest(request, response, client);
+  placesRequest(request, response, googleClient);
+});
+
+exports.pay = functions.https.onRequest((request, response) => {
+  payRequest(request, response, stripeClient);
 });
