@@ -6,12 +6,12 @@ import {
   CartEmptyText,
 } from "../components/checkout.styles";
 
-const CheckoutError = () => {
+const CheckoutError = ({ route }) => {
   return (
     <SafeAreaView>
       <CartIconContainer>
         <CartIcon icon="cart-remove" />
-        <CartEmptyText>Error!</CartEmptyText>
+        <CartEmptyText>Error: {route.params.error.message}</CartEmptyText>
       </CartIconContainer>
     </SafeAreaView>
   );

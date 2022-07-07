@@ -28,6 +28,8 @@ export const CartContextProvider = ({ children }) => {
         clearCart: clear,
         restuarant,
         cart,
+        setRestaurant,
+        setCart,
       }}
     >
       {children}
