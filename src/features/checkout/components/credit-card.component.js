@@ -19,12 +19,9 @@ const CreditCardInput = ({ name = "Sheen", setCard, onError }) => {
         name,
       };
       try {
-        console.log("Credit Card");
         const info = await cardTokenRequest(card);
         setCard(info);
-        console.log(info);
       } catch (e) {
-        console.error("SUM WRONG WITH YOU CREDIT CARD", e);
         onError();
       }
     }
